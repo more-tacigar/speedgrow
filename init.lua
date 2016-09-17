@@ -90,3 +90,13 @@ minetest.register_craftitem("speedgrow:speedgrow", {
 	groups           = {speedgrow = 1},
 	on_use           = on_use,
 })
+
+-- register a craft of speedgrow.
+minetest.register_craft{
+	output = "speedgrow:speedgrow",
+	recipe = {
+		"default:leaves", "default:leaves", "default:leaves",
+		"default:leaves",   "default:tree", "default:leaves",
+		              "",   "default:tree",               "",
+	},
+}

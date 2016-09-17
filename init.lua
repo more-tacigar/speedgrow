@@ -95,8 +95,8 @@ minetest.register_craftitem("speedgrow:speedgrow", {
 minetest.register_craft{
 	output = "speedgrow:speedgrow",
 	recipe = {
-		"default:leaves", "default:leaves", "default:leaves",
-		"default:leaves",   "default:tree", "default:leaves",
-		              "",   "default:tree",               "",
+		{"default:leaves", "default:leaves", "default:leaves"},
+		{"default:leaves",   "default:tree", "default:leaves"},
+		{              "",   "default:tree",               ""},
 	},
 }

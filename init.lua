@@ -27,7 +27,7 @@ local plants_maxsize = {}
 minetest.after(0, function()
 	for nodename, _ in pairs(minetest.registered_nodes) do
 		if minetest.get_item_group(nodename, "plant") > 0 then
-			local plantname, size = split_plant_name(nodename)
+			local plantname, size = split_plantname(nodename)
 			if (not plantname) or (not size) then
 				break
 			end

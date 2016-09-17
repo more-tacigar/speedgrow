@@ -34,8 +34,20 @@ end)
 -- and its maximum size.
 local plants_maxsize = {}
 
+-- register plants_maxsize table.
 minetest.after(0, function()
+	for nodename, _ in pairs(minetest.registered_nodes) do
+		if minetest.get_item_group(nodename, "plant") > 0 then
+			local plantname, size = split_plant_name(nodename)
+			if (not plantname) or (not size) then
+				break
+			end
 
+			if not plant_maxsize[plantname] or plant_maxsize[plantname] < size then
+				plant_maxsize[plantname] = size
+			end
+		end
+	end
 end)
 
 local function on_use(itemstack, user, pointed_thing)

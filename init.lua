@@ -16,7 +16,7 @@ local function get_plantname_from_seedname(nodename)
 	if (not modname) or (not plantname) then
 		return nil
 	end
-	return modname .. plantname
+	return modname .. ":" .. plantname
 end
 
 -- plants_maxsize represents a table that contains base plant names
@@ -41,8 +41,13 @@ end)
 
 -- grow_up grows up a plant that exists at position pos.
 local function grow_up(pos, plantname)
+	print(plantname)
+	for k, v in pairs(plants_maxsize) do
+		print(k, v)
+	end
 	local maxsize = plants_maxsize[plantname]
-	local new_nodename = plantname .. tostring(maxsize)
+	local new_nodename = plantname .. "_" .. tostring(maxsize)
+	print(new_nodename)
 
 	minetest.set_node(pos, {name = new_nodename})
 end

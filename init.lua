@@ -32,8 +32,8 @@ minetest.after(0, function()
 				break
 			end
 
-			if not plant_maxsize[plantname] or plant_maxsize[plantname] < size then
-				plant_maxsize[plantname] = size
+			if not plants_maxsize[plantname] or plants_maxsize[plantname] < size then
+				plants_maxsize[plantname] = size
 			end
 		end
 	end

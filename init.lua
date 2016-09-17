@@ -1,10 +1,7 @@
 ------------------------------------------------------------
--- Copyright (c) 2016 tacigar
+-- Copyright (c) 2016 tacigar. All rights reserved.
 -- https://github.com/tacigar/speedgrow
 ------------------------------------------------------------
-
--- 自作MODのデバッグ時に植物を完全に成長させたい場面が多々あったので作成
--- 主にデバッグ用のMODです
 
 local function split_plant_name(nodename)
 	return string.match(nodename, "(.+)_(%d+)")

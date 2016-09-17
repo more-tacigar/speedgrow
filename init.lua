@@ -30,10 +30,37 @@ minetest.after(0, function()
 	end
 end)
 
+-- plants_maxsize represents a table that contains base plant names
+-- and its maximum size.
+local plants_maxsize = {}
+
+minetest.after(0, function()
+
+end)
+
+local function on_use(itemstack, user, pointed_thing)
+	if pointed_thing.under == nil then
+		return
+	end
+
+	local position = pointed_thing.under
+	local node = minetest.get_node(position)
+
+	if minetest.get_item_group(node.name, "plant") > 0 then
+
+	elseif minetest.get_item_group(node.name, "seed") > 0 then
+
+	end
+end
+
 minetest.register_craftitem("speedgrow:speedgrow", {
-	description = "Speedgrow",
-	inventory_image = "speedgrow.png",
-	stack_max = 1,
+	description      = "Speedgrow",
+	inventory_image  = "speedgrow.png",
+	wield_image      = "speedgrow.png",
+	stack_max        = 1,
+	groups           = {speedgrow = 1},
+	on_use           = on_use,
+
 
 	on_use = function(itemstack, user, pointed_thing)
 		if pointed_thing.under == nil then return end

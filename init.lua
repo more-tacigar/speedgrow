@@ -3,32 +3,20 @@
 -- https://github.com/tacigar/speedgrow
 ------------------------------------------------------------
 
-local function split_plant_name(nodename)
+-- split_plant_name splits a node name, like "farming:wheat_8"
+-- to "farming:wheat" and "8".
+local function split_plantname(nodename)
 	return string.match(nodename, "(.+)_(%d+)")
 end
 
-local function split_seed_plant_name(nodename)
-	local pattern = "(.+):seed_(.+)"
-	return string.match(nodename, pattern)
+-- get_plantname_from_seedname returns a full plantname (modname + plantname)
+-- from a seed node name.
+local function get_plantname_from_seedname(nodename)
+	local modname, plantname = string.match(nodename, "(.+):seed_(.+)")
+	return modname .. plantname
 end
 
-local function combine_plant_and_size(plantname, size)
-	return plantname.."_"..tostring(size)
-end
 
-local tree_grow_flag = default.can_grow and default.grow_sapling
-
-local plants = {}
-minetest.after(0, function()
-	for nodename, _ in pairs(minetest.registered_nodes) do
-		if minetest.get_item_group(nodename, "plant") > 0 then
-			local plantname, size = split_plant_name(nodename)
-			if not plants[plantname] or plants[plantname] < size then
-				plants[plantname] = size
-			end
-		end
-	end
-end)
 
 -- plants_maxsize represents a table that contains base plant names
 -- and its maximum size.
@@ -50,15 +38,23 @@ minetest.after(0, function()
 	end
 end)
 
+-- can_grow_tree represents whether trees can be grown by this mod.
+local can_grow_tree =
+	default.can_grow and default.grow_sapling
+
 local function on_use(itemstack, user, pointed_thing)
 	if pointed_thing.under == nil then
 		return
 	end
-
 	local position = pointed_thing.under
 	local node = minetest.get_node(position)
 
 	if minetest.get_item_group(node.name, "plant") > 0 then
+		local plantname, size = split_plant_name(node.name)
+		if (not plantname) or (not size) then
+			return
+		end
+		grow_up(plantname)
 
 	elseif minetest.get_item_group(node.name, "seed") > 0 then
 

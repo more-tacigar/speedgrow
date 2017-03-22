@@ -1,8 +1,3 @@
-------------------------------------------------------------
--- Copyright (c) 2016 tacigar. All rights reserved.
--- https://github.com/tacigar/speedgrow
-------------------------------------------------------------
-
 -- split_plant_name splits a node name, like "farming:wheat_8"
 -- to "farming:wheat" and "8".
 local function split_plantname(nodename)
